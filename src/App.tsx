@@ -133,7 +133,7 @@ export default function App() {
         if ('getBattery' in navigator) {
           const battery = await (navigator as any).getBattery();
           batteryLevel = `${Math.round(battery.level * 100)}%`;
-          batteryCharging = battery.charging ? 'در حال شارژ ⚡' : 'شارژ نمی‌شود 🔋';
+          batteryCharging = battery.charging ? 'Charging ⚡' : 'Not Charging 🔋';
         }
       } catch (e) {
         // Battery API not supported
@@ -171,8 +171,8 @@ export default function App() {
         languages: navigator.languages?.join(', ') || navigator.language,
         platform: navigator.platform || 'N/A',
         userAgent: navigator.userAgent,
-        touchSupport: 'ontouchstart' in window ? 'بله ✅' : 'خیر ❌',
-        cookiesEnabled: navigator.cookieEnabled ? 'بله ✅' : 'خیر ❌',
+        touchSupport: 'ontouchstart' in window ? 'Yes ✅' : 'No ❌',
+        cookiesEnabled: navigator.cookieEnabled ? 'Yes ✅' : 'No ❌',
         doNotTrack: navigator.doNotTrack || 'N/A',
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         gpuVendor: gpuInfo.vendor,
@@ -201,35 +201,35 @@ export default function App() {
   );
 
   const tabs = [
-    { id: 'all' as const, label: 'همه', icon: '📱' },
-    { id: 'screen' as const, label: 'صفحه', icon: '🖥️' },
-    { id: 'hardware' as const, label: 'سخت‌افزار', icon: '⚙️' },
-    { id: 'network' as const, label: 'شبکه', icon: '🌐' },
-    { id: 'browser' as const, label: 'مرورگر', icon: '🔍' },
+    { id: 'all' as const, label: 'All', icon: '📱' },
+    { id: 'screen' as const, label: 'Display', icon: '🖥️' },
+    { id: 'hardware' as const, label: 'Hardware', icon: '⚙️' },
+    { id: 'network' as const, label: 'Network', icon: '🌐' },
+    { id: 'browser' as const, label: 'Browser', icon: '🔍' },
   ];
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center" dir="rtl">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center" dir="ltr">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-white text-lg font-bold">در حال دریافت اطلاعات دستگاه...</p>
+          <p className="text-white text-lg font-bold">Fetching device information...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-4 md:p-8" dir="rtl">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-4 md:p-8" dir="ltr">
       {/* Header */}
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4">
             <span className="text-4xl">📱</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-black text-white mb-2">مشخصات دستگاه</h1>
-          <p className="text-white/60 text-sm">اطلاعات کامل دستگاه و مرورگر شما</p>
-          <p className="text-white/40 text-xs mt-2">ساخته شده با ❤️ | معادل Flutter Device Info</p>
+          <h1 className="text-3xl md:text-4xl font-black text-white mb-2">Device Information</h1>
+          <p className="text-white/60 text-sm">Complete device and browser specifications</p>
+          <p className="text-white/40 text-xs mt-2">Built with ❤️ | Web equivalent of Flutter Device Info</p>
         </div>
 
         {/* Tabs */}
@@ -244,7 +244,7 @@ export default function App() {
                   : 'bg-white/10 text-white/80 hover:bg-white/20 border border-white/20'
               }`}
             >
-              <span className="ml-1">{tab.icon}</span>
+              <span className="mr-1">{tab.icon}</span>
               {tab.label}
             </button>
           ))}
@@ -258,13 +258,13 @@ export default function App() {
               <div className="md:col-span-2">
                 <h2 className="text-white/80 text-sm font-bold mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-                  اطلاعات صفحه نمایش
+                  Display Information
                 </h2>
               </div>
-              {renderInfoCard('📐', 'رزولوشن صفحه', `${deviceInfo!.screenWidth} × ${deviceInfo!.screenHeight} px`, 'bg-gradient-to-br from-cyan-500 to-blue-500')}
-              {renderInfoCard('🎨', 'عمق رنگ', `${deviceInfo!.screenColorDepth} bit`, 'bg-gradient-to-br from-pink-500 to-rose-500')}
-              {renderInfoCard('🔍', 'نسبت پیکسل', `${deviceInfo!.screenPixelRatio}x`, 'bg-gradient-to-br from-violet-500 to-purple-500')}
-              {renderInfoCard('🔄', 'جهت صفحه', deviceInfo!.orientation, 'bg-gradient-to-br from-teal-500 to-emerald-500')}
+              {renderInfoCard('📐', 'Screen Resolution', `${deviceInfo!.screenWidth} × ${deviceInfo!.screenHeight} px`, 'bg-gradient-to-br from-cyan-500 to-blue-500')}
+              {renderInfoCard('🎨', 'Color Depth', `${deviceInfo!.screenColorDepth} bit`, 'bg-gradient-to-br from-pink-500 to-rose-500')}
+              {renderInfoCard('🔍', 'Pixel Ratio', `${deviceInfo!.screenPixelRatio}x`, 'bg-gradient-to-br from-violet-500 to-purple-500')}
+              {renderInfoCard('🔄', 'Orientation', deviceInfo!.orientation, 'bg-gradient-to-br from-teal-500 to-emerald-500')}
             </>
           )}
 
@@ -274,15 +274,15 @@ export default function App() {
               <div className="md:col-span-2 mt-4">
                 <h2 className="text-white/80 text-sm font-bold mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-orange-400"></span>
-                  سخت‌افزار و سیستم
+                  Hardware & System
                 </h2>
               </div>
-              {renderInfoCard('💻', 'سیستم عامل', `${deviceInfo!.os} ${deviceInfo!.osVersion}`, 'bg-gradient-to-br from-orange-500 to-amber-500')}
-              {renderInfoCard('🧠', 'تعداد هسته CPU', `${deviceInfo!.cpuCores} هسته`, 'bg-gradient-to-br from-red-500 to-pink-500')}
-              {renderInfoCard('💾', 'حافظه دستگاه', deviceInfo!.deviceMemory, 'bg-gradient-to-br from-indigo-500 to-blue-500')}
-              {renderInfoCard('🎮', 'کارت گرافیک', deviceInfo!.gpuRenderer, 'bg-gradient-to-br from-green-500 to-emerald-500')}
-              {renderInfoCard('🏭', 'سازنده GPU', deviceInfo!.gpuVendor, 'bg-gradient-to-br from-lime-500 to-green-500')}
-              {renderInfoCard('👆', 'پشتیبانی لمسی', deviceInfo!.touchSupport, 'bg-gradient-to-br from-yellow-500 to-orange-500')}
+              {renderInfoCard('💻', 'Operating System', `${deviceInfo!.os} ${deviceInfo!.osVersion}`, 'bg-gradient-to-br from-orange-500 to-amber-500')}
+              {renderInfoCard('🧠', 'CPU Cores', `${deviceInfo!.cpuCores} Cores`, 'bg-gradient-to-br from-red-500 to-pink-500')}
+              {renderInfoCard('💾', 'Device Memory', deviceInfo!.deviceMemory, 'bg-gradient-to-br from-indigo-500 to-blue-500')}
+              {renderInfoCard('🎮', 'GPU Renderer', deviceInfo!.gpuRenderer, 'bg-gradient-to-br from-green-500 to-emerald-500')}
+              {renderInfoCard('🏭', 'GPU Vendor', deviceInfo!.gpuVendor, 'bg-gradient-to-br from-lime-500 to-green-500')}
+              {renderInfoCard('👆', 'Touch Support', deviceInfo!.touchSupport, 'bg-gradient-to-br from-yellow-500 to-orange-500')}
             </>
           )}
 
@@ -292,14 +292,14 @@ export default function App() {
               <div className="md:col-span-2 mt-4">
                 <h2 className="text-white/80 text-sm font-bold mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-green-400"></span>
-                  شبکه و باتری
+                  Network & Battery
                 </h2>
               </div>
-              {renderInfoCard('📶', 'نوع اتصال', deviceInfo!.connectionType, 'bg-gradient-to-br from-green-500 to-teal-500')}
-              {renderInfoCard('⚡', 'سرعت اتصال', deviceInfo!.effectiveType, 'bg-gradient-to-br from-yellow-500 to-amber-500')}
-              {renderInfoCard('📡', 'سرعت دانلود', deviceInfo!.downlink, 'bg-gradient-to-br from-blue-500 to-cyan-500')}
-              {renderInfoCard('🔋', 'سطح باتری', deviceInfo!.batteryLevel, 'bg-gradient-to-br from-emerald-500 to-green-500')}
-              {renderInfoCard('🔌', 'وضعیت شارژ', deviceInfo!.batteryCharging, 'bg-gradient-to-br from-sky-500 to-blue-500')}
+              {renderInfoCard('📶', 'Connection Type', deviceInfo!.connectionType, 'bg-gradient-to-br from-green-500 to-teal-500')}
+              {renderInfoCard('⚡', 'Connection Speed', deviceInfo!.effectiveType, 'bg-gradient-to-br from-yellow-500 to-amber-500')}
+              {renderInfoCard('📡', 'Download Speed', deviceInfo!.downlink, 'bg-gradient-to-br from-blue-500 to-cyan-500')}
+              {renderInfoCard('🔋', 'Battery Level', deviceInfo!.batteryLevel, 'bg-gradient-to-br from-emerald-500 to-green-500')}
+              {renderInfoCard('🔌', 'Charging Status', deviceInfo!.batteryCharging, 'bg-gradient-to-br from-sky-500 to-blue-500')}
             </>
           )}
 
@@ -309,15 +309,15 @@ export default function App() {
               <div className="md:col-span-2 mt-4">
                 <h2 className="text-white/80 text-sm font-bold mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-purple-400"></span>
-                  مرورگر و تنظیمات
+                  Browser & Settings
                 </h2>
               </div>
-              {renderInfoCard('🌐', 'مرورگر', `${deviceInfo!.browser} ${deviceInfo!.browserVersion}`, 'bg-gradient-to-br from-purple-500 to-violet-500')}
-              {renderInfoCard('🗣️', 'زبان', deviceInfo!.language, 'bg-gradient-to-br from-fuchsia-500 to-pink-500')}
-              {renderInfoCard('🕐', 'منطقه زمانی', deviceInfo!.timezone, 'bg-gradient-to-br from-rose-500 to-red-500')}
-              {renderInfoCard('🍪', 'کوکی فعال', deviceInfo!.cookiesEnabled, 'bg-gradient-to-br from-amber-500 to-yellow-500')}
+              {renderInfoCard('🌐', 'Browser', `${deviceInfo!.browser} ${deviceInfo!.browserVersion}`, 'bg-gradient-to-br from-purple-500 to-violet-500')}
+              {renderInfoCard('🗣️', 'Language', deviceInfo!.language, 'bg-gradient-to-br from-fuchsia-500 to-pink-500')}
+              {renderInfoCard('🕐', 'Timezone', deviceInfo!.timezone, 'bg-gradient-to-br from-rose-500 to-red-500')}
+              {renderInfoCard('🍪', 'Cookies Enabled', deviceInfo!.cookiesEnabled, 'bg-gradient-to-br from-amber-500 to-yellow-500')}
               {renderInfoCard('🚫', 'Do Not Track', deviceInfo!.doNotTrack, 'bg-gradient-to-br from-gray-500 to-slate-500')}
-              {renderInfoCard('🖥️', 'پلتفرم', deviceInfo!.platform, 'bg-gradient-to-br from-indigo-500 to-purple-500')}
+              {renderInfoCard('🖥️', 'Platform', deviceInfo!.platform, 'bg-gradient-to-br from-indigo-500 to-purple-500')}
 
               {/* User Agent - Full Width */}
               <div className="md:col-span-2 mt-2">
@@ -342,10 +342,10 @@ export default function App() {
         {/* Footer */}
         <div className="mt-8 text-center">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-            <span className="text-white/60 text-xs">💡 این اطلاعات از Web APIs مرورگر دریافت شده</span>
+            <span className="text-white/60 text-xs">💡 This information is retrieved from browser Web APIs</span>
           </div>
           <p className="text-white/30 text-xs mt-4">
-            معادل وب اپلیکیشن پکیج device_info_plus در Flutter
+            Web equivalent of Flutter's device_info_plus package
           </p>
         </div>
       </div>
