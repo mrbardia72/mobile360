@@ -35,6 +35,19 @@ print('Hardware: ${androidInfo.hardware}');
 
 ---
 
+## 📸 Screenshots
+
+### 🏠 All Tabs View (Overview)
+![Device Info - All Tabs](https://image.qwenlm.ai/generated-images/51817837-e8d8-4d1e-a7e1-5e581a446c5b/_result.png)
+
+### ⚙️ Hardware & System Tab
+![Device Info - Hardware Tab](https://image.qwenlm.ai/generated-images/e775ddd9-634c-4eb8-9481-7a9b9209cb00/_result.png)
+
+### 🌐 Network & Battery Tab
+![Device Info - Network Tab](https://image.qwenlm.ai/generated-images/808e0400-ea64-438a-ab46-cd1c9ad75a29/_result.png)
+
+---
+
 ## 🚀 Features
 
 This web app is the web equivalent of `device_info_plus` and displays the following information:
