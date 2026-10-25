@@ -1,29 +1,22 @@
 import { useState, useEffect } from 'react';
 
 interface DeviceInfo {
-  // Browser Info
   browser: string;
   browserVersion: string;
-  // OS Info
   os: string;
   osVersion: string;
-  // Screen Info
   screenWidth: number;
   screenHeight: number;
   screenColorDepth: number;
   screenPixelRatio: number;
   orientation: string;
-  // Hardware Info
   cpuCores: number;
   deviceMemory: string;
-  // Network Info
   connectionType: string;
   effectiveType: string;
   downlink: string;
-  // Battery Info
   batteryLevel: string;
   batteryCharging: string;
-  // Other
   language: string;
   languages: string;
   platform: string;
@@ -32,7 +25,6 @@ interface DeviceInfo {
   cookiesEnabled: string;
   doNotTrack: string;
   timezone: string;
-  // WebGL Info
   gpuVendor: string;
   gpuRenderer: string;
 }
@@ -186,15 +178,15 @@ export default function App() {
     fetchDeviceInfo();
   }, []);
 
-  const renderInfoCard = (icon: string, label: string, value: string, color: string) => (
-    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02]">
+  const renderInfoCard = (icon: string, label: string, value: string, accentColor: string) => (
+    <div className="bg-[#1a1a2e] border border-gray-800 rounded-2xl p-4 hover:bg-[#1f1f35] hover:border-gray-700 transition-all duration-300 hover:scale-[1.02] group">
       <div className="flex items-center gap-3">
-        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${color} shadow-lg`}>
-          <span className="text-white text-lg">{icon}</span>
+        <div className={`w-10 h-10 rounded-xl flex items-center justify-center bg-[#0f0f1a] border border-gray-800 group-hover:border-${accentColor}/30 transition-colors`}>
+          <span className="text-lg">{icon}</span>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-white/60 text-xs font-medium">{label}</p>
-          <p className="text-white text-sm font-bold truncate" title={value}>{value}</p>
+          <p className="text-gray-500 text-xs font-medium uppercase tracking-wider">{label}</p>
+          <p className="text-gray-100 text-sm font-semibold truncate mt-0.5" title={value}>{value}</p>
         </div>
       </div>
     </div>
@@ -210,41 +202,51 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center" dir="ltr">
+      <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center" dir="ltr">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-white text-lg font-bold">Fetching device information...</p>
+          <div className="w-16 h-16 border-4 border-gray-800 border-t-emerald-500 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-300 text-lg font-bold">Fetching device information...</p>
+          <p className="text-gray-600 text-sm mt-2">Please wait a moment</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-4 md:p-8" dir="ltr">
+    <div className="min-h-screen bg-[#0a0a0f] p-4 md:p-8" dir="ltr">
+      {/* Subtle background pattern */}
+      <div className="fixed inset-0 opacity-[0.03] pointer-events-none" style={{
+        backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
+        backgroundSize: '40px 40px'
+      }}></div>
+
       {/* Header */}
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto relative">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-[#1a1a2e] border border-gray-800 mb-4 shadow-lg shadow-emerald-500/5">
             <span className="text-4xl">📱</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-black text-white mb-2">Device Information</h1>
-          <p className="text-white/60 text-sm">Complete device and browser specifications</p>
-          <p className="text-white/40 text-xs mt-2">Built with ❤️ | Web equivalent of Flutter Device Info</p>
+          <p className="text-gray-500 text-sm">Complete device and browser specifications</p>
+          <div className="flex items-center justify-center gap-2 mt-3">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <p className="text-gray-600 text-xs">Live data from Web APIs</p>
+          </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-6">
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
+              className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
                 activeTab === tab.id
-                  ? 'bg-white text-purple-900 shadow-lg shadow-white/20'
-                  : 'bg-white/10 text-white/80 hover:bg-white/20 border border-white/20'
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-lg shadow-emerald-500/10'
+                  : 'bg-[#1a1a2e] text-gray-400 hover:text-gray-200 hover:bg-[#1f1f35] border border-gray-800 hover:border-gray-700'
               }`}
             >
-              <span className="mr-1">{tab.icon}</span>
+              <span className="mr-1.5">{tab.icon}</span>
               {tab.label}
             </button>
           ))}
@@ -256,15 +258,15 @@ export default function App() {
           {(activeTab === 'all' || activeTab === 'screen') && (
             <>
               <div className="md:col-span-2">
-                <h2 className="text-white/80 text-sm font-bold mb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
+                <h2 className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                   Display Information
                 </h2>
               </div>
-              {renderInfoCard('📐', 'Screen Resolution', `${deviceInfo!.screenWidth} × ${deviceInfo!.screenHeight} px`, 'bg-gradient-to-br from-cyan-500 to-blue-500')}
-              {renderInfoCard('🎨', 'Color Depth', `${deviceInfo!.screenColorDepth} bit`, 'bg-gradient-to-br from-pink-500 to-rose-500')}
-              {renderInfoCard('🔍', 'Pixel Ratio', `${deviceInfo!.screenPixelRatio}x`, 'bg-gradient-to-br from-violet-500 to-purple-500')}
-              {renderInfoCard('🔄', 'Orientation', deviceInfo!.orientation, 'bg-gradient-to-br from-teal-500 to-emerald-500')}
+              {renderInfoCard('📐', 'Screen Resolution', `${deviceInfo!.screenWidth} × ${deviceInfo!.screenHeight} px`, 'cyan')}
+              {renderInfoCard('🎨', 'Color Depth', `${deviceInfo!.screenColorDepth} bit`, 'pink')}
+              {renderInfoCard('🔍', 'Pixel Ratio', `${deviceInfo!.screenPixelRatio}x`, 'violet')}
+              {renderInfoCard('🔄', 'Orientation', deviceInfo!.orientation, 'teal')}
             </>
           )}
 
@@ -272,17 +274,17 @@ export default function App() {
           {(activeTab === 'all' || activeTab === 'hardware') && (
             <>
               <div className="md:col-span-2 mt-4">
-                <h2 className="text-white/80 text-sm font-bold mb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-orange-400"></span>
+                <h2 className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
                   Hardware & System
                 </h2>
               </div>
-              {renderInfoCard('💻', 'Operating System', `${deviceInfo!.os} ${deviceInfo!.osVersion}`, 'bg-gradient-to-br from-orange-500 to-amber-500')}
-              {renderInfoCard('🧠', 'CPU Cores', `${deviceInfo!.cpuCores} Cores`, 'bg-gradient-to-br from-red-500 to-pink-500')}
-              {renderInfoCard('💾', 'Device Memory', deviceInfo!.deviceMemory, 'bg-gradient-to-br from-indigo-500 to-blue-500')}
-              {renderInfoCard('🎮', 'GPU Renderer', deviceInfo!.gpuRenderer, 'bg-gradient-to-br from-green-500 to-emerald-500')}
-              {renderInfoCard('🏭', 'GPU Vendor', deviceInfo!.gpuVendor, 'bg-gradient-to-br from-lime-500 to-green-500')}
-              {renderInfoCard('👆', 'Touch Support', deviceInfo!.touchSupport, 'bg-gradient-to-br from-yellow-500 to-orange-500')}
+              {renderInfoCard('💻', 'Operating System', `${deviceInfo!.os} ${deviceInfo!.osVersion}`, 'orange')}
+              {renderInfoCard('🧠', 'CPU Cores', `${deviceInfo!.cpuCores} Cores`, 'red')}
+              {renderInfoCard('💾', 'Device Memory', deviceInfo!.deviceMemory, 'indigo')}
+              {renderInfoCard('🎮', 'GPU Renderer', deviceInfo!.gpuRenderer, 'green')}
+              {renderInfoCard('🏭', 'GPU Vendor', deviceInfo!.gpuVendor, 'lime')}
+              {renderInfoCard('👆', 'Touch Support', deviceInfo!.touchSupport, 'yellow')}
             </>
           )}
 
@@ -290,16 +292,16 @@ export default function App() {
           {(activeTab === 'all' || activeTab === 'network') && (
             <>
               <div className="md:col-span-2 mt-4">
-                <h2 className="text-white/80 text-sm font-bold mb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-green-400"></span>
+                <h2 className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
                   Network & Battery
                 </h2>
               </div>
-              {renderInfoCard('📶', 'Connection Type', deviceInfo!.connectionType, 'bg-gradient-to-br from-green-500 to-teal-500')}
-              {renderInfoCard('⚡', 'Connection Speed', deviceInfo!.effectiveType, 'bg-gradient-to-br from-yellow-500 to-amber-500')}
-              {renderInfoCard('📡', 'Download Speed', deviceInfo!.downlink, 'bg-gradient-to-br from-blue-500 to-cyan-500')}
-              {renderInfoCard('🔋', 'Battery Level', deviceInfo!.batteryLevel, 'bg-gradient-to-br from-emerald-500 to-green-500')}
-              {renderInfoCard('🔌', 'Charging Status', deviceInfo!.batteryCharging, 'bg-gradient-to-br from-sky-500 to-blue-500')}
+              {renderInfoCard('📶', 'Connection Type', deviceInfo!.connectionType, 'green')}
+              {renderInfoCard('⚡', 'Connection Speed', deviceInfo!.effectiveType, 'yellow')}
+              {renderInfoCard('📡', 'Download Speed', deviceInfo!.downlink, 'blue')}
+              {renderInfoCard('🔋', 'Battery Level', deviceInfo!.batteryLevel, 'emerald')}
+              {renderInfoCard('🔌', 'Charging Status', deviceInfo!.batteryCharging, 'sky')}
             </>
           )}
 
@@ -307,30 +309,30 @@ export default function App() {
           {(activeTab === 'all' || activeTab === 'browser') && (
             <>
               <div className="md:col-span-2 mt-4">
-                <h2 className="text-white/80 text-sm font-bold mb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-purple-400"></span>
+                <h2 className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
                   Browser & Settings
                 </h2>
               </div>
-              {renderInfoCard('🌐', 'Browser', `${deviceInfo!.browser} ${deviceInfo!.browserVersion}`, 'bg-gradient-to-br from-purple-500 to-violet-500')}
-              {renderInfoCard('🗣️', 'Language', deviceInfo!.language, 'bg-gradient-to-br from-fuchsia-500 to-pink-500')}
-              {renderInfoCard('🕐', 'Timezone', deviceInfo!.timezone, 'bg-gradient-to-br from-rose-500 to-red-500')}
-              {renderInfoCard('🍪', 'Cookies Enabled', deviceInfo!.cookiesEnabled, 'bg-gradient-to-br from-amber-500 to-yellow-500')}
-              {renderInfoCard('🚫', 'Do Not Track', deviceInfo!.doNotTrack, 'bg-gradient-to-br from-gray-500 to-slate-500')}
-              {renderInfoCard('🖥️', 'Platform', deviceInfo!.platform, 'bg-gradient-to-br from-indigo-500 to-purple-500')}
+              {renderInfoCard('🌐', 'Browser', `${deviceInfo!.browser} ${deviceInfo!.browserVersion}`, 'purple')}
+              {renderInfoCard('🗣️', 'Language', deviceInfo!.language, 'fuchsia')}
+              {renderInfoCard('🕐', 'Timezone', deviceInfo!.timezone, 'rose')}
+              {renderInfoCard('🍪', 'Cookies Enabled', deviceInfo!.cookiesEnabled, 'amber')}
+              {renderInfoCard('🚫', 'Do Not Track', deviceInfo!.doNotTrack, 'gray')}
+              {renderInfoCard('🖥️', 'Platform', deviceInfo!.platform, 'indigo')}
 
               {/* User Agent - Full Width */}
               <div className="md:col-span-2 mt-2">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-500 to-gray-600 flex items-center justify-center shadow-lg">
-                      <span className="text-white text-lg">📋</span>
+                <div className="bg-[#1a1a2e] border border-gray-800 rounded-2xl p-4 hover:bg-[#1f1f35] transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#0f0f1a] border border-gray-800 flex items-center justify-center">
+                      <span className="text-lg">📋</span>
                     </div>
                     <div>
-                      <p className="text-white/60 text-xs font-medium">User Agent</p>
+                      <p className="text-gray-500 text-xs font-medium uppercase tracking-wider">User Agent</p>
                     </div>
                   </div>
-                  <p className="text-white/80 text-xs font-mono break-all leading-relaxed bg-black/20 rounded-xl p-3">
+                  <p className="text-gray-400 text-xs font-mono break-all leading-relaxed bg-[#0f0f1a] border border-gray-800 rounded-xl p-3">
                     {deviceInfo!.userAgent}
                   </p>
                 </div>
@@ -340,11 +342,12 @@ export default function App() {
         </div>
 
         {/* Footer */}
-        <div className="mt-8 text-center">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-            <span className="text-white/60 text-xs">💡 This information is retrieved from browser Web APIs</span>
+        <div className="mt-10 text-center">
+          <div className="inline-flex items-center gap-2 bg-[#1a1a2e] border border-gray-800 rounded-full px-5 py-2.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span className="text-gray-500 text-xs">Information retrieved from browser Web APIs</span>
           </div>
-          <p className="text-white/30 text-xs mt-4">
+          <p className="text-gray-700 text-xs mt-4">
             Web equivalent of Flutter's device_info_plus package
           </p>
         </div>
