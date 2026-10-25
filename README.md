@@ -1,18 +1,18 @@
-# 📱 Device Info - مشخصات دستگاه
+# 📱 Device Info - Device Specifications
 
-> یک وب اپلیکیشن زیبا و ریسپانسیو برای نمایش اطلاعات کامل دستگاه و مرورگر
+> A beautiful and responsive web application to display complete device and browser information
 
 ---
 
-## 🎯 درباره پروژه
+## 🎯 About
 
-این پروژه یک **وب اپلیکیشن** است که با **React + TypeScript + Tailwind CSS** ساخته شده و وظیفه آن نمایش اطلاعات دستگاه کاربر است.
+This project is a **web application** built with **React + TypeScript + Tailwind CSS** that displays the user's device information.
 
-### 💡 آیا با Dart می‌شود برنامه اندروید نوشت؟
+### 💡 Can you write Android apps with Dart?
 
-**بله!** با زبان **Dart** و فریمورک **Flutter** می‌توان اپلیکیشن‌های موبایل (اندروید و iOS) ساخت.
+**Yes!** With the **Dart** language and **Flutter** framework, you can build mobile applications for Android and iOS.
 
-برای گرفتن اطلاعات دستگاه در Flutter از پکیج زیر استفاده می‌شود:
+To get device information in Flutter, use the following package:
 
 ```yaml
 # pubspec.yaml
@@ -21,154 +21,154 @@ dependencies:
 ```
 
 ```dart
-// مثال کد Flutter
+// Flutter code example
 import 'package:device_info_plus/device_info_plus.dart';
 
 final deviceInfo = DeviceInfoPlugin();
 final androidInfo = await deviceInfo.androidInfo;
 
-print('مدل: ${androidInfo.model}');
-print('نسخه اندروید: ${androidInfo.version.release}');
-print('برند: ${androidInfo.brand}');
-print('سخت‌افزار: ${androidInfo.hardware}');
+print('Model: ${androidInfo.model}');
+print('Android Version: ${androidInfo.version.release}');
+print('Brand: ${androidInfo.brand}');
+print('Hardware: ${androidInfo.hardware}');
 ```
 
 ---
 
-## 🚀 امکانات وب اپلیکیشن
+## 🚀 Features
 
-این وب اپ معادل نسخه وب `device_info_plus` است و اطلاعات زیر را نمایش می‌دهد:
+This web app is the web equivalent of `device_info_plus` and displays the following information:
 
-### 🖥️ اطلاعات صفحه نمایش
-| ویژگی | توضیحات |
-|--------|----------|
-| رزولوشن | عرض × ارتفاع صفحه |
-| عمق رنگ | تعداد بیت رنگ |
-| نسبت پیکسل | Device Pixel Ratio |
-| جهت صفحه | Portrait / Landscape |
+### 🖥️ Display Information
+| Feature | Description |
+|---------|-------------|
+| Resolution | Screen width × height |
+| Color Depth | Number of color bits |
+| Pixel Ratio | Device Pixel Ratio |
+| Orientation | Portrait / Landscape |
 
-### ⚙️ سخت‌افزار و سیستم
-| ویژگی | توضیحات |
-|--------|----------|
-| سیستم عامل | نام و نسخه OS |
-| تعداد هسته CPU | Hardware Concurrency |
-| حافظه دستگاه | Device Memory |
-| کارت گرافیک | GPU Renderer |
-| سازنده GPU | GPU Vendor |
-| پشتیبانی لمسی | Touch Support |
+### ⚙️ Hardware & System
+| Feature | Description |
+|---------|-------------|
+| Operating System | OS name and version |
+| CPU Cores | Hardware Concurrency |
+| Device Memory | RAM amount |
+| GPU | GPU Renderer |
+| GPU Vendor | GPU Manufacturer |
+| Touch Support | Touch capability |
 
-### 🌐 شبکه و باتری
-| ویژگی | توضیحات |
-|--------|----------|
-| نوع اتصال | WiFi / Cellular / ... |
-| سرعت اتصال | 4G / 3G / ... |
-| سرعت دانلود | Downlink Speed |
-| سطح باتری | Battery Level |
-| وضعیت شارژ | Charging Status |
+### 🌐 Network & Battery
+| Feature | Description |
+|---------|-------------|
+| Connection Type | WiFi / Cellular / ... |
+| Connection Speed | 4G / 3G / ... |
+| Download Speed | Downlink Speed |
+| Battery Level | Current charge % |
+| Charging Status | Is charging? |
 
-### 🔍 مرورگر و تنظیمات
-| ویژگی | توضیحات |
-|--------|----------|
-| مرورگر | نام و نسخه Browser |
-| زبان | Language |
-| منطقه زمانی | Timezone |
-| کوکی | Cookies Enabled |
-| User Agent | Full UA String |
-
----
-
-## 🛠️ تکنولوژی‌های استفاده شده
-
-| تکنولوژی | نقش |
-|-----------|------|
-| **React 18** | فریمورک UI |
-| **TypeScript** | زبان برنامه‌نویسی |
-| **Tailwind CSS** | استایل‌دهی |
-| **Vite** | بیلدر و Dev Server |
-| **Web APIs** | دریافت اطلاعات دستگاه |
+### 🔍 Browser & Settings
+| Feature | Description |
+|---------|-------------|
+| Browser | Name and version |
+| Language | Preferred language |
+| Timezone | System timezone |
+| Cookies | Cookies enabled |
+| User Agent | Full UA string |
 
 ---
 
-## 📦 نصب و اجرا
+## 🛠️ Tech Stack
+
+| Technology | Role |
+|------------|------|
+| **React 18** | UI Framework |
+| **TypeScript** | Programming Language |
+| **Tailwind CSS** | Styling |
+| **Vite** | Build Tool & Dev Server |
+| **Web APIs** | Device Info Retrieval |
+
+---
+
+## 📦 Installation & Usage
 
 ```bash
-# نصب وابستگی‌ها
+# Install dependencies
 npm install
 
-# اجرای سرور توسعه
+# Start development server
 npm run dev
 
-# بیلد برای پروداکشن
+# Build for production
 npm run build
 
-# پیش‌نمایش بیلد
+# Preview production build
 npm run preview
 ```
 
 ---
 
-## 📁 ساختار پروژه
+## 📁 Project Structure
 
 ```
 ├── src/
-│   ├── App.tsx          # کامپوننت اصلی
-│   ├── main.tsx         # نقطه ورود
-│   └── index.css        # استایل‌های سراسری
-├── index.html           # فایل HTML اصلی
-├── vite.config.ts       # تنظیمات Vite
-├── tailwind.config.js   # تنظیمات Tailwind
-├── tsconfig.json        # تنظیمات TypeScript
-└── README.md            # این فایل
+│   ├── App.tsx          # Main component
+│   ├── main.tsx         # Entry point
+│   └── index.css        # Global styles
+├── index.html           # Main HTML file
+├── vite.config.ts       # Vite configuration
+├── tailwind.config.js   # Tailwind configuration
+├── tsconfig.json        # TypeScript configuration
+└── README.md            # This file
 ```
 
 ---
 
-## 🌐 Web APIs استفاده شده
+## 🌐 Web APIs Used
 
-| API | کاربرد |
+| API | Purpose |
 |-----|---------|
-| `navigator.userAgent` | تشخیص مرورگر و OS |
-| `window.screen` | اطلاعات صفحه نمایش |
-| `navigator.hardwareConcurrency` | تعداد هسته CPU |
-| `navigator.deviceMemory` | حافظه دستگاه |
-| `navigator.getBattery()` | اطلاعات باتری |
-| `navigator.connection` | اطلاعات شبکه |
-| `WebGL` | اطلاعات کارت گرافیک |
-| `Intl.DateTimeFormat` | منطقه زمانی |
+| `navigator.userAgent` | Detect browser & OS |
+| `window.screen` | Screen information |
+| `navigator.hardwareConcurrency` | CPU core count |
+| `navigator.deviceMemory` | Device memory |
+| `navigator.getBattery()` | Battery information |
+| `navigator.connection` | Network information |
+| `WebGL` | GPU information |
+| `Intl.DateTimeFormat` | Timezone detection |
 
 ---
 
-## 📱 مقایسه Flutter vs Web
+## 📱 Flutter vs Web Comparison
 
-| ویژگی | Flutter (Dart) | Web App (React) |
-|--------|----------------|-----------------|
-| پلتفرم | اندروید / iOS | همه مرورگرها |
-| دسترسی به سخت‌افزار | کامل ✅ | محدود ⚠️ |
-| نصب | نیاز به نصب | بدون نصب |
-| به‌روزرسانی | از طریق استور | آنی |
-| زبان | Dart | TypeScript/JS |
-
----
-
-## 📝 یادداشت‌ها
-
-- برخی اطلاعات مانند `deviceMemory` فقط در مرورگرهای Chromium پشتیبانی می‌شوند
-- Battery API ممکن است در برخی مرورگرها غیرفعال باشد
-- اطلاعات GPU از طریق WebGL استخراج می‌شود
-- این اپ کاملاً ریسپانسیو و راست‌چین (RTL) است
+| Feature | Flutter (Dart) | Web App (React) |
+|---------|----------------|-----------------|
+| Platform | Android / iOS | All browsers |
+| Hardware Access | Full ✅ | Limited ⚠️ |
+| Installation | Required | Not needed |
+| Updates | Via app store | Instant |
+| Language | Dart | TypeScript/JS |
 
 ---
 
-## 📄 لایسنس
+## 📝 Notes
 
-MIT License - آزاد برای استفاده شخصی و تجاری
+- Some information like `deviceMemory` is only supported in Chromium-based browsers
+- Battery API may be disabled in some browsers
+- GPU information is extracted via WebGL
+- This app is fully responsive and supports RTL layouts
+
+---
+
+## 📄 License
+
+MIT License - Free for personal and commercial use
 
 ---
 
 <div align="center">
 
-**ساخته شده با ❤️**
+**Built with ❤️**
 
-*معادل وب اپلیکیشن پکیج `device_info_plus` در Flutter*
+*Web equivalent of Flutter's `device_info_plus` package*
 
 </div>
